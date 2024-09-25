@@ -7,8 +7,7 @@ import static org.junit.Assert.*;
 /** Tests the maxTileExists() static method of Model.
  *
  * @author Omar Khan
- */
-public class TestMaxTileExists {
+ */ public class TestMaxTileExists {
     /** The board we'll be testing. */
     static Board b;
 
