@@ -73,12 +73,19 @@ public class IntListExercises {
             return false;
         }
 
+        // Check if the current element is prime
         boolean currElemIsPrime = Primes.isPrime(lst.first);
 
+        // If the current element is prime, square it
         if (currElemIsPrime) {
-            lst.first *= lst.first;
+            lst.first *= lst.first; // square the current element
         }
 
-        return currElemIsPrime || squarePrimes(lst.rest);
+        //在方法中进行递归，
+        boolean restChanged = squarePrimes(lst.rest);
+
+
+        return currElemIsPrime || restChanged;
     }
+
 }

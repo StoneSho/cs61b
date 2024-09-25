@@ -12,7 +12,7 @@ public class Primes {
      * primality test, and returns the correct answer w.h.p. (due to the presence)
      * of Carmichael numbers. If this makes no sense to you, good! It shouldn't.
      * The goal of this function is to make sure you learn to abstract away the inner
-     * workings of a function and debug it as a black-box with the "Step Over" feature.
+         * workings of a function and debug it as a black-box with the "Step Over" feature.
      *
      * @source: https://www.geeksforgeeks.org/primality-test-set-2-fermet-method/
      * @param n an arbitary integrer
