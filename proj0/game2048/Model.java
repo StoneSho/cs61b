@@ -5,7 +5,7 @@ import java.util.Observable;
 
 
 /** The state of a game of 2048.
- *  @author TODO: YOUR NAME HERE
+ *  @author StoneShaw
  */
 public class Model extends Observable {
     /** Current contents of the board. */
@@ -137,7 +137,15 @@ public class Model extends Observable {
      *  Empty spaces are stored as null.
      * */
     public static boolean emptySpaceExists(Board b) {
-        // TODO: Fill in this function.
+        // 使用b.tile(int col,int row)读取棋盘中不同的位置，注意第一个参数是列，第二个参数是行，棋盘原点为左下角，依次向上和右递增
+        int size = b.size();
+        for(int i = 0 ; i < size;i++){
+            for(int j=0;j < size;j++){
+                if(b.tile(i,j)==null)
+                    return true;
+            }
+        }
+
         return false;
     }
 
