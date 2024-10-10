@@ -155,7 +155,14 @@ public class Model extends Observable {
      * given a Tile object t, we get its value with t.value().
      */
     public static boolean maxTileExists(Board b) {
-        // TODO: Fill in this function.
+        // b.tile(i,j).value(),先调用Board类里的tile方法，获取对应位置上的瓦片，再用Tile类的value方法获取该瓦片的值
+        for(int i=0;i<b.size();i++){
+            for(int j=0;j<b.size();j++){
+                if(b.tile(i,j)!=null && b.tile(i,j).value()==Model.MAX_PIECE){
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -166,9 +173,40 @@ public class Model extends Observable {
      * 2. There are two adjacent tiles with the same value.
      */
     public static boolean atLeastOneMoveExists(Board b) {
-        // TODO: Fill in this function.
+        // 先判定是否存在至少一个空白位置
+        if (emptySpaceExists(b)) {
+            return true;
+        } else {
+            int size = b.size();
+            // 遍历整个棋盘
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < size; j++) {
+                    Tile currentTile = b.tile(i, j);
+                    if (currentTile != null) {
+                        int currentValue = currentTile.value();
+
+                        // 判断右方是否有相同值
+                        if (i + 1 < size) {
+                            Tile rightTile = b.tile(i + 1, j);
+                            if (rightTile != null && rightTile.value() == currentValue) {
+                                return true;
+                            }
+                        }
+
+                        // 判断上方是否有相同值
+                        if (j + 1 < size) {
+                            Tile upTile = b.tile(i, j + 1);
+                            if (upTile != null && upTile.value() == currentValue) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
         return false;
     }
+
 
 
     @Override

@@ -1,36 +1,27 @@
 package game2048;
-
-/** Symbolic names for the four sides of a board.
- *  @author P. N. Hilfinger */
+/** 棋盘四个方向的符号名称。
+ *  作者: P. N. Hilfinger */
 public enum Side {
-    /** The parameters (COL0, ROW0, DCOL, and DROW) for each of the
-     *  symbolic directions, D, below are to be interpreted as follows:
-     *     The board's standard orientation has the top of the board
-     *     as NORTH, and rows and columns (see Model) are numbered
-     *     from its lower-left corner. Consider the board oriented
-     *     so that side D of the board is farthest from you. Then
-     *        * (COL0*s, ROW0*s) are the standard coordinates of the
-     *          lower-left corner of the reoriented board (where s is the
-     *          board size), and
-     *        * If (c, r) are the standard coordinates of a certain
-     *          square on the reoriented board, then (c+DCOL, r+DROW)
-     *          are the standard coordinates of the squares immediately
-     *          above it on the reoriented board.
-     *  The idea behind going to this trouble is that by using the
-     *  col() and row() methods below to translate from reoriented to
-     *  standard coordinates, one can arrange to use exactly the same code
-     *  to compute the result of tilting the board in any particular
-     *  direction. */
+    /** 对于下面每个符号方向 D 来说，参数 (COL0, ROW0, DCOL 和 DROW)
+     *  解释如下：
+     *     棋盘的标准方向是顶部朝北，行和列（见 Model 类）是从
+     *     棋盘的左下角编号的。假设棋盘按方向 D 排列，D 方向
+     *     是最远离你的方向。则：
+     *        * (COL0*s, ROW0*s) 是重新排列棋盘后左下角的标准坐标
+     *          （s 是棋盘大小），并且
+     *        * 如果 (c, r) 是重新排列棋盘上某一方块的标准坐标，
+     *          则 (c+DCOL, r+DROW) 是重新排列后紧接其上的方块
+     *          的标准坐标。
+     *  采用这种方法的目的是，通过使用下面的 col() 和 row() 方法
+     *  从重新排列后的坐标转换到标准坐标，可以使用相同的代码来计算
+     *  任意方向上的棋盘倾斜结果。 */
 
     NORTH(0, 0, 0, 1), EAST(0, 1, 1, 0), SOUTH(1, 1, 0, -1),
     WEST(1, 0, -1, 0);
 
-    /** The side that is in the direction (DCOL, DROW) from any square
-     *  of the board.  Here, "direction (DCOL, DROW) means that to
-     *  move one space in the direction of this Side increases the row
-     *  by DROW and the colunn by DCOL.  (COL0, ROW0) are the row and
-     *  column of the lower-left square when sitting at the board facing
-     *  towards this Side. */
+    /** 该方向 (DCOL, DROW) 表示从棋盘上任意方块移动一格时，
+     *  行数增加 DROW，列数增加 DCOL。（COL0, ROW0）表示
+     *  面朝该方向时，左下角方块的行列位置。 */
     Side(int col0, int row0, int dcol, int drow) {
         this.row0 = row0;
         this.col0 = col0;
@@ -38,7 +29,7 @@ public enum Side {
         this.dcol = dcol;
     }
 
-    /** Returns the side opposite of side S. */
+    /** 返回与 S 方向相反的方向。 */
     static Side opposite(Side s) {
         if (s == NORTH) {
             return SOUTH;
@@ -51,20 +42,18 @@ public enum Side {
         }
     }
 
-    /** Return the standard column number for square (C, R) on a board
-     *  of size SIZE oriented with this Side on top. */
+    /** 返回棋盘大小为 SIZE、当前 Side 顶部的棋盘中 (C, R) 方块的
+     *  标准列号。 */
     public int col(int c, int r, int size) {
         return col0 * (size - 1) + c * drow + r * dcol;
     }
 
-    /** Return the standard row number for square (C, R) on a board
-     *  of size SIZE oriented with this Side on top. */
+    /** 返回棋盘大小为 SIZE、当前 Side 顶部的棋盘中 (C, R) 方块的
+     *  标准行号。 */
     public int row(int c, int r, int size) {
         return row0 * (size - 1) - c * dcol + r * drow;
     }
 
-    /** Parameters describing this Side, as documented in the comment at the
-     *  start of this class. */
+    /** 描述此方向的参数，具体如本类开头的注释中所述。 */
     private int row0, col0, drow, dcol;
-
 };
