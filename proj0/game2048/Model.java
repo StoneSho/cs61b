@@ -109,10 +109,30 @@ public class Model extends Observable {
     public boolean tilt(Side side) {
         boolean changed;
         changed = false;
+        board.setViewingPerspective(side);
+        //从上往下逐行遍历
+        for(int i=0;i<board.size();i++){ //逐列读取在进行行变换
+            int k =board.size()-1; //每一次列循环从上开始
+            for(int j=board.size()-2;j>=0;j--){
+                Tile t =board.tile(i,j);
+                if(t==null) continue; //如果当前位置为0则跳过
+                while(k>j && board.tile(i,k)!=null && board.tile(i,k).value()!=t.value())
+                    k--;
+                if(k==j) continue;
+                if(board.move(i,k,t)){
+                    score = score+board.tile(i,k).value();
+                    k--;
+                }
+                changed = true;
+            }
+        }
+
 
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
+
+
 
         checkGameOver();
         if (changed) {

@@ -35,21 +35,31 @@ class GUISource implements InputSource {
     public String getKey() {
         String command = _source.readKey();
         switch (command) {
-            case "↑" :
+            case "向上箭头":
+            case "W":
+            case "w":  // 处理W键为向上
                 command = "Up";
                 break;
-            case "→" :
+            case "向右箭头":
+            case "D":
+            case "d":  // 处理D键为向右
                 command = "Right";
                 break;
-            case "↓" :
+            case "向下箭头":
+            case "S":
+            case "s":  // 处理S键为向下
                 command = "Down";
                 break;
-            case "←" :
+            case "向左箭头":
+            case "A":
+            case "a":  // 处理A键为向左
                 command = "Left";
                 break;
-            default :
+            default:
+                System.out.println("Unknown key: " + command);
                 break;
         }
+
 
         String logLine = String.format("K %s%n", command);
 
