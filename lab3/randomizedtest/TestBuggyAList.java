@@ -8,5 +8,7 @@ import static org.junit.Assert.*;
  * Created by hug.
  */
 public class TestBuggyAList {
-  // YOUR TESTS HERE
+
 }
+
+
